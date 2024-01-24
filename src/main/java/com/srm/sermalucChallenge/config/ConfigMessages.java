@@ -25,7 +25,7 @@ public class ConfigMessages {
     ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:i18n/messages");
-        messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setDefaultEncoding("ISO-8859-1");
         messageSource.setCacheSeconds(3600); // Cache for an hour
         return messageSource;
     }

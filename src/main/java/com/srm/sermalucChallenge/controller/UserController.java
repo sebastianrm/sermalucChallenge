@@ -1,6 +1,7 @@
 package com.srm.sermalucChallenge.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,49 +39,54 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/v1/users")
 @Tag(name = "User API", description = "the user Crud Controller API ")
 public class UserController {
-	
+
 	@Autowired
 	AESEncryptionDecryptionUtil AesEncryptionDecryptionService;
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	RegExPatterValidatorUtils regExPatterValidatorUtils;
-	
+
+	private MessageSource messageSource = null;
+
+	@Autowired
+	public void RestI18nController(MessageSource messageSource) {
+		this.messageSource = messageSource;
+	}
+
 	@Operation(summary = "Register new user")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "successfull", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ParentUserLog.class)) }),
 			@ApiResponse(responseCode = "400", description = "BAD REQUEST", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))}),
-					
-					@ApiResponse(responseCode = "409", description = "CONFLICT - the register Exist", content = {
-							@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))})				
-			})
-	@PostMapping("/add")
-	public ResponseEntity<?> addNewUser(
-			@Valid
-			@RequestBody 
-			UserRequest userRequest){
+					@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }),
 
-//		verifica si contraseña cumople con la expresion regular
-		
-		if (regExPatterValidatorUtils.validPasswordPattern(userRequest.getPassword())) {
-			throw new CustomNoValidPasswordException("Contraseña invalida"); 
+			@ApiResponse(responseCode = "409", description = "CONFLICT - the register Exist", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) }) })
+	@PostMapping("/add")
+	public ResponseEntity<?> addNewUser(@Valid @RequestBody UserRequest userRequest) {
+
+//		verifica si contraseña cumple con la expresion regular
+
+		if (!regExPatterValidatorUtils.validPasswordPattern(userRequest.getPassword())) {
+			
+			@SuppressWarnings("null")
+			String message = messageSource.getMessage("pattern.password", new Object[]{}, null);
+			
+			throw new CustomNoValidPasswordException(message);
 		}
-		
-		
-		
+
 		/**
 		 * Primer paso Encripta Password
 		 */
 		userRequest = encryptPassword(userRequest);
-		
+
 		return ResponseEntity.ok(userService.registerUser(userRequest));
-		
+
 	}
-	
+
 	/**
 	 * Encryt password
 	 * 
@@ -93,6 +99,5 @@ public class UserController {
 
 		return userRequest;
 	}
-
 
 }
