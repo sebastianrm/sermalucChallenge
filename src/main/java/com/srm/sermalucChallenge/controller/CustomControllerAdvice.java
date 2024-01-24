@@ -76,7 +76,7 @@ public class CustomControllerAdvice {
 		
 		logger.error(e);
 		
-		return new ResponseEntity<>(new ErrorResponse("El correo ya registrado."), HttpStatus.CONFLICT);
+		return new ResponseEntity<>(new ErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
 		
 	}
 }
