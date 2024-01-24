@@ -27,13 +27,11 @@
 
 2.- `cd sermalucChallenge`
 
-3.- `git checkout release/0.1.1`
-
-4.- `mvn spring-boot:run` 
+3.- `mvn spring-boot:run` 
 
 or:
 
-4.1- `mvn install -DskipTests`
+4.1- `mvn install`
 
 4.2- `java -jar target/sermalucChallenge-0.1.1-SNAPSHOT.jar`
 
