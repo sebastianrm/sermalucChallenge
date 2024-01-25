@@ -75,12 +75,11 @@ Se implemento la clase `CustomControllerAdvice` que maneja las excepciones
   ^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@dominio.com*$
   
   
-## La clave
+## Password
 
 segir una expresion regular:
   	la validacion de la expresion regular la realiza la clase `RegExPatterValidatorUtils` y la expresion regular se encuentra en un archivo de propiedades llamado `resources/patterns.properties`
 
-El scope predefinido es `singleton`, entonces este bean se recontruye por cada request y permite cambiar la expresion regular sin afectar algun request en ejecucion.
 
 ## JWT
 
