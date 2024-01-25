@@ -28,7 +28,7 @@ class UserEntityTest {
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
 		
-		userEntity = new UserEntity("juan@dominio.com", "name", "password", true);
+		userEntity = new UserEntity("juanaaa@dominio.com", "name", "password", true);
 		
 	}
 	
