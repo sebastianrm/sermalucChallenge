@@ -60,9 +60,36 @@ Ejemplo body:
   ]
 }
 `
+#### Requerimientos
+
+### Errores.
+
+Se implemento la clase `CustomControllerAdvice` que maneja las excepciones
+
+## Correo
+
+  1. Debe ser unico.
+  encaso de repetir el correo la clase `CustomControllerAdvice` responde `"El correo ya registrado"`. http status code 409 `Conflict`.
+  2.  debe respertar la expresion regular definida en la clase `ParentUser` y esta es :  
+   
+  ^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@dominio.com*$
+  
+  
+## La clave
+
+segir una expresion regular:
+  	la validacion de la expresion regular la realiza la clase `RegExPatterValidatorUtils` y la expresion regular se encuentra en un archivo de propiedades llamado `resources/patterns.properties`
+
+El scope predefinido es `singleton`, entonces este bean se recontruye por cada request y permite cambiar la expresion regular sin afectar algun request en ejecucion.
+
+## JWT
+
+Se utilizo `jjwt` version `0.11.5`
+
+
 #### Base de datos
 
-Esta se crea atraves del diagrama de clasess
+Esta se crea atraves del diagrama de clases
 ```mermaid
 erDiagram
     USER ||--o{ USER_PHONES : have
