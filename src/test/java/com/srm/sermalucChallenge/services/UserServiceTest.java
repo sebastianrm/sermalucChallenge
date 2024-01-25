@@ -27,7 +27,7 @@ class UserServiceTest {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 
-		userRequest = new UserRequest("juan@dominio.com", "name", "password", true);
+		userRequest = new UserRequest("juanaaa@dominio.com", "name", "password", true);
 		
 		PhoneRequest phoneRequest = new PhoneRequest("1234567", "1", "57");
 		ArrayList<PhoneRequest> arrayList = new ArrayList<PhoneRequest>();

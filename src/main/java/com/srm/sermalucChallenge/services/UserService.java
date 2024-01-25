@@ -51,10 +51,7 @@ public class UserService {
 	 */
 	public OnSuccessUserResgister registerUser(@Valid UserRequest userRequest) throws CustomDataConstraintException {
 
-		/**
-		 * El susario Existe?
-		 */
-		UserEntity UserEntity = castUserRequestToUserEntity(userRequest);
+		UserEntity UserEntity = userRequest.factoryUserEntity();
 
 		if (userEntityExist(UserEntity)) {
 			
@@ -101,17 +98,6 @@ public class UserService {
 		}
 		return save;
 
-	}
-
-	/**
-	 * Helper Method to Cast <b>use Factory Patron Desing</b>
-	 * 
-	 * @param userRequest
-	 * @return UserEntity
-	 */
-	private UserEntity castUserRequestToUserEntity(UserRequest userRequest) {
-
-		return userRequest.factoryUserEntity();
 	}
 
 }

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
  * @version 0.0.1-SNAPSHOT
  */
 @Component
-//@Scope("request")
 @PropertySource("classpath:patterns.properties")
 public class RegExPatterValidatorUtils {
 

@@ -28,22 +28,24 @@ import jakarta.validation.constraints.NotBlank;
 @Entity
 public class UserEntity extends ParentUser {
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name = "user_phone", joinColumns = @JoinColumn(name = "fk_user", referencedColumnName = "email"), 
-	inverseJoinColumns = @JoinColumn(name = "fk_phone", referencedColumnName = "id"))
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "user_phone", joinColumns = @JoinColumn(name = "fk_user", referencedColumnName = "email"), inverseJoinColumns = @JoinColumn(name = "fk_phone", referencedColumnName = "id"))
 	private Collection<PhoneEntity> phoneEntities;
 
 	public UserEntity() {
 		super();
 	}
 
-
-	public UserEntity(
-			@NotBlank(message = "{notblank.email}") 
-			@Email(message = "{notvalid.email}") String email,
+	/**
+	 * 
+	 * @param email
+	 * @param name
+	 * @param password
+	 * @param isactive
+	 */
+	public UserEntity(@NotBlank(message = "{notblank.email}") @Email(message = "{notvalid.email}") String email,
 			@NotBlank(message = "{notblank.name}") String name,
-			@NotBlank(message = "{notblank.password}") String password, 
-			Boolean isactive) {
+			@NotBlank(message = "{notblank.password}") String password, Boolean isactive) {
 		super(email, name, password, isactive);
 	}
 
@@ -62,8 +64,6 @@ public class UserEntity extends ParentUser {
 	public void setPhoneEntities(Collection<PhoneEntity> phoneEntities) {
 		this.phoneEntities = phoneEntities;
 	}
-
-
 
 	@Override
 	public UserRequest factoryUserRequest() {
